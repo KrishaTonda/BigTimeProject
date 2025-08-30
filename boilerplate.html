@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seller Dashboard — Boilerplate (HTML Only)</title>
+  <!-- No CSS / JS on purpose. Pure HTML structure to extend later. -->
+</head>
+<body>
+  <!-- ========================= HEADER ========================= -->
+  <header role="banner">
+    <h1>Seller Dashboard</h1>
+    <nav aria-label="Top navigation">
+      <a href="#overview">Overview</a> |
+      <a href="#products">Products</a> |
+      <a href="#inventory">Inventory</a> |
+      <a href="#orders">Orders</a> |
+      <a href="#analytics">Analytics</a> |
+      <a href="#storefront">Storefront</a> |
+      <a href="#payments">Payments</a> |
+      <a href="#delivery">Delivery</a> |
+      <a href="#notifications">Notifications</a> |
+      <a href="#account">Account</a> |
+      <a href="#support">Support</a>
+    </nav>
+    <hr />
+  </header>
+
+  <!-- ========================= MAIN ========================= -->
+  <main id="main" role="main">
+    <!-- ========== OVERVIEW ========= -->
+    <section id="overview" aria-labelledby="overview-title">
+      <h2 id="overview-title">Overview</h2>
+      <p>Quick stats for today / this week / this month.</p>
+      <ul>
+        <li><strong>Total Sales:</strong> —</li>
+        <li><strong>Orders:</strong> —</li>
+        <li><strong>Top Product:</strong> —</li>
+        <li><strong>Low Stock Alerts:</strong> —</li>
+      </ul>
+      <p><!-- TODO: Replace with small KPI cards and charts later. --></p>
+      <hr />
+    </section>
+
+    <!-- ========== PRODUCTS ========= -->
+    <section id="products" aria-labelledby="products-title">
+      <h2 id="products-title">Product Management</h2>
+
+      <!-- Create / Edit Product Form -->
+      <form action="#" method="post" aria-labelledby="product-form-title">
+        <h3 id="product-form-title">Add / Edit Product</h3>
+
+        <fieldset>
+          <legend>Basic Details</legend>
+          <label for="p-name">Product Name</label><br />
+          <input id="p-name" name="name" type="text" required /><br /><br />
+
+          <label for="p-desc">Description</label><br />
+          <textarea id="p-desc" name="description" rows="4" cols="40"></textarea><br /><br />
+
+          <label for="p-price">Price (GHS)</label><br />
+          <input id="p-price" name="price" type="number" step="0.01" min="0" required /><br /><br />
+
+          <label for="p-sku">SKU (optional)</label><br />
+          <input id="p-sku" name="sku" type="text" /><br /><br />
+
+          <label for="p-stock">Starting Stock</label><br />
+          <input id="p-stock" name="stock" type="number" min="0" /><br /><br />
+
+          <label for="p-category">Category</label><br />
+          <input id="p-category" name="category" type="text" placeholder="e.g., Fashion, Food" /><br /><br />
+
+          <label for="p-images">Product Images</label><br />
+          <input id="p-images" name="images" type="file" accept="image/*" multiple /><br /><br />
+
+          <button type="submit">Save Product</button>
+          <button type="reset">Reset</button>
+        </fieldset>
+      </form>
+
+      <!-- Product List Table -->
+      <h3>Products List</h3>
+      <p><!-- TODO: Replace with searchable + sortable table. --></p>
+      <table border="1" aria-label="Products table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price (GHS)</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>(img)</td>
+            <td>Sample Product</td>
+            <td>0.00</td>
+            <td>0</td>
+            <td>Draft</td>
+            <td>
+              <button type="button">Edit</button>
+              <button type="button">Delete</button>
+              <button type="button">Publish</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+    </section>
+
+    <!-- ========== INVENTORY ========= -->
+    <section id="inventory" aria-labelledby="inventory-title">
+      <h2 id="inventory-title">Inventory Management</h2>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Update Stock</legend>
+          <label for="inv-sku">SKU / Product</label><br />
+          <input id="inv-sku" name="sku" type="text" /><br /><br />
+
+          <label for="inv-qty">Adjust Quantity (+/-)</label><br />
+          <input id="inv-qty" name="quantity" type="number" /><br /><br />
+
+          <label for="inv-threshold">Low Stock Threshold</label><br />
+          <input id="inv-threshold" name="threshold" type="number" /><br /><br />
+
+          <button type="submit">Update</button>
+        </fieldset>
+      </form>
+
+      <h3>Low Stock Alerts</h3>
+      <ul>
+        <li>No alerts.</li>
+      </ul>
+      <hr />
+    </section>
+
+    <!-- ========== ORDERS ========= -->
+    <section id="orders" aria-labelledby="orders-title">
+      <h2 id="orders-title">Orders</h2>
+
+      <!-- Filters / Search -->
+      <form action="#" method="get" aria-label="Order filters">
+        <label for="f-status">Status</label>
+        <select id="f-status" name="status">
+          <option value="">All</option>
+          <option>Pending</option>
+          <option>Confirmed</option>
+          <option>Packed</option>
+          <option>Shipped</option>
+          <option>Out for Delivery</option>
+          <option>Delivered</option>
+          <option>Cancelled</option>
+        </select>
+        <label for="f-q">Search</label>
+        <input id="f-q" name="q" type="search" placeholder="Customer / order #" />
+        <button type="submit">Apply</button>
+      </form>
+
+      <!-- Orders Table -->
+      <table border="1" aria-label="Orders table">
+        <thead>
+          <tr>
+            <th>Order #</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Total (GHS)</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0001</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Pending</td>
+            <td>
+              <button type="button">View</button>
+              <button type="button">Confirm</button>
+              <button type="button">Mark Delivered</button>
+              <button type="button">Cancel</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Order Detail (placeholder) -->
+      <details>
+        <summary>Sample Order Detail</summary>
+        <p><strong>Customer:</strong> —</p>
+        <p><strong>Address:</strong> —</p>
+        <p><strong>Items:</strong></p>
+        <ul>
+          <li>—</li>
+        </ul>
+        <p><strong>Notes:</strong> —</p>
+      </details>
+      <hr />
+    </section>
+
+    <!-- ========== ANALYTICS ========= -->
+    <section id="analytics" aria-labelledby="analytics-title">
+      <h2 id="analytics-title">Analytics</h2>
+      <p>Sales charts and KPIs will appear here.</p>
+      <ul>
+        <li>Revenue by day/week/month</li>
+        <li>Top products</li>
+        <li>Order conversion</li>
+      </ul>
+      <hr />
+    </section>
+
+    <!-- ========== STOREFRONT SETTINGS ========= -->
+    <section id="storefront" aria-labelledby="storefront-title">
+      <h2 id="storefront-title">Storefront</h2>
+      <p>Your public store link: <code>yourstore.ourdomain.com</code></p>
+
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Branding</legend>
+          <label for="s-name">Store Name</label><br />
+          <input id="s-name" name="store_name" type="text" /><br /><br />
+
+          <label for="s-logo">Logo</label><br />
+          <input id="s-logo" name="logo" type="file" accept="image/*" /><br /><br />
+
+          <label for="s-description">Store Description</label><br />
+          <textarea id="s-description" name="store_description" rows="3" cols="40"></textarea><br /><br />
+
+          <button type="submit">Save Storefront</button>
+        </fieldset>
+      </form>
+      <hr />
+    </section>
+
+    <!-- ========== PAYMENTS ========= -->
+    <section id="payments" aria-labelledby="payments-title">
+      <h2 id="payments-title">Payments</h2>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Mobile Money Settings</legend>
+          <label for="mo-network">MoMo Network</label><br />
+          <select id="mo-network" name="momo_network">
+            <option>MTN</option>
+            <option>Vodafone</option>
+            <option>AirtelTigo</option>
+          </select><br /><br />
+
+          <label for="mo-number">MoMo Number</label><br />
+          <input id="mo-number" name="momo_number" type="tel" placeholder="e.g., 024xxxxxxx" /><br /><br />
+
+          <label for="pay-cod">Cash on Delivery</label>
+          <input id="pay-cod" name="cod" type="checkbox" value="1" /> Enable<br /><br />
+
+          <button type="submit">Save Payment Settings</button>
+        </fieldset>
+      </form>
+      <hr />
+    </section>
+
+    <!-- ========== DELIVERY ========= -->
+    <section id="delivery" aria-labelledby="delivery-title">
+      <h2 id="delivery-title">Delivery</h2>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Delivery Zones (Placeholder)</legend>
+          <label for="d-origin">Pickup/Origin Area</label><br />
+          <input id="d-origin" name="origin" type="text" placeholder="e.g., Madina" /><br /><br />
+
+          <label for="d-zone">Add Zone</label><br />
+          <input id="d-zone" name="zone" type="text" placeholder="e.g., Tema" /><br /><br />
+
+          <label for="d-fee">Delivery Fee (GHS)</label><br />
+          <input id="d-fee" name="fee" type="number" step="0.01" min="0" /><br /><br />
+
+          <button type="submit">Add / Update Zone</button>
+        </fieldset>
+      </form>
+
+      <h3>Zones List</h3>
+      <table border="1" aria-label="Delivery zones table">
+        <thead>
+          <tr>
+            <th>Zone</th>
+            <th>Fee (GHS)</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>—</td>
+            <td>—</td>
+            <td><button type="button">Edit</button> <button type="button">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+    </section>
+
+    <!-- ========== NOTIFICATIONS ========= -->
+    <section id="notifications" aria-labelledby="notifications-title">
+      <h2 id="notifications-title">Notifications</h2>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Order Alerts</legend>
+          <label for="n-email">Email</label>
+          <input id="n-email" name="notify_email" type="checkbox" value="1" /> Enable<br />
+          <label for="n-sms">SMS</label>
+          <input id="n-sms" name="notify_sms" type="checkbox" value="1" /> Enable<br />
+          <label for="n-wa">WhatsApp</label>
+          <input id="n-wa" name="notify_whatsapp" type="checkbox" value="1" /> Enable<br /><br />
+
+          <label for="n-target">Notification Target (Email/Phone)</label><br />
+          <input id="n-target" name="notify_target" type="text" /><br /><br />
+
+          <button type="submit">Save Notification Settings</button>
+        </fieldset>
+      </form>
+      <hr />
+    </section>
+
+    <!-- ========== ACCOUNT ========= -->
+    <section id="account" aria-labelledby="account-title">
+      <h2 id="account-title">Account</h2>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Profile</legend>
+          <label for="a-name">Full Name</label><br />
+          <input id="a-name" name="full_name" type="text" /><br /><br />
+
+          <label for="a-email">Email</label><br />
+          <input id="a-email" name="email" type="email" /><br /><br />
+
+          <label for="a-phone">Phone</label><br />
+          <input id="a-phone" name="phone" type="tel" /><br /><br />
+
+          <label for="a-store">Preferred Store URL</label><br />
+          <input id="a-store" name="store_slug" type="text" placeholder="yourstore" /><br /><br />
+
+          <button type="submit">Save Account</button>
+        </fieldset>
+      </form>
+      <hr />
+    </section>
+
+    <!-- ========== SUPPORT ========= -->
+    <section id="support" aria-labelledby="support-title">
+      <h2 id="support-title">Support</h2>
+      <p>Need help? Contact support via email or WhatsApp.</p>
+      <address>
+        <p>Email: support@example.com</p>
+        <p>WhatsApp: +233 00 000 0000</p>
+      </address>
+      <details>
+        <summary>FAQ (Placeholder)</summary>
+        <p>Q: How do I add a product?<br />A: Use the form in the Products section.</p>
+      </details>
+      <hr />
+    </section>
+  </main>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer role="contentinfo">
+    <p>&copy; <span id="year">2025</span> Your Platform Name</p>
+  </footer>
+</body>
+</html>
