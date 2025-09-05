@@ -1,0 +1,8 @@
+body {
+    background: linear-gradient(100deg, #8ef5ec, white, #8ef5ec);
+}
+
+.header {
+    color: #000000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

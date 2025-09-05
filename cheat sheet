@@ -1,0 +1,3 @@
+git branch -a : lists all local  and remote branches
+git checkout <branch-name> : switch to a specific branch
+git checkout -b <new-branch-name> : create new branch and switch to it.

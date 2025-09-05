@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Seller Dashboard — Boilerplate (HTML Only)</title>
-  <!-- No CSS / JS on purpose. Pure HTML structure to extend later. -->
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
 </head>
 <body>
   <!-- ========================= HEADER ========================= -->
   <header role="banner">
-    <h1>Seller Dashboard</h1>
+    <h1 class="header">Seller Dashboard</h1>
     <nav aria-label="Top navigation">
       <a href="#overview">Overview</a> |
       <a href="#products">Products</a> |
@@ -30,7 +31,7 @@
   <main id="main" role="main">
     <!-- ========== OVERVIEW ========= -->
     <section id="overview" aria-labelledby="overview-title">
-      <h2 id="overview-title">Overview</h2>
+      <h2 id="overview-title" class="header">Overview</h2>
       <p>Quick stats for today / this week / this month.</p>
       <ul>
         <li><strong>Total Sales:</strong> —</li>
@@ -44,10 +45,10 @@
 
     <!-- ========== PRODUCTS ========= -->
     <section id="products" aria-labelledby="products-title">
-      <h2 id="products-title">Product Management</h2>
+      <h2 id="products-title" class="header">Product Management</h2>
 
       <!-- Create / Edit Product Form -->
-      <form action="#" method="post" aria-labelledby="product-form-title">
+      <form id="productForm" action="#" method="post" aria-labelledby="product-form-title">
         <h3 id="product-form-title">Add / Edit Product</h3>
 
         <fieldset>
@@ -112,8 +113,8 @@
 
     <!-- ========== INVENTORY ========= -->
     <section id="inventory" aria-labelledby="inventory-title">
-      <h2 id="inventory-title">Inventory Management</h2>
-      <form action="#" method="post">
+      <h2 id="inventory-title" class="header">Inventory Management</h2>
+      <form id="inventoryForm" action="#" method="post">
         <fieldset>
           <legend>Update Stock</legend>
           <label for="inv-sku">SKU / Product</label><br />
@@ -138,7 +139,7 @@
 
     <!-- ========== ORDERS ========= -->
     <section id="orders" aria-labelledby="orders-title">
-      <h2 id="orders-title">Orders</h2>
+      <h2 id="orders-title" class="header">Orders</h2>
 
       <!-- Filters / Search -->
       <form action="#" method="get" aria-label="Order filters">
@@ -203,7 +204,7 @@
 
     <!-- ========== ANALYTICS ========= -->
     <section id="analytics" aria-labelledby="analytics-title">
-      <h2 id="analytics-title">Analytics</h2>
+      <h2 id="analytics-title" class="header">Analytics</h2>
       <p>Sales charts and KPIs will appear here.</p>
       <ul>
         <li>Revenue by day/week/month</li>
@@ -215,10 +216,10 @@
 
     <!-- ========== STOREFRONT SETTINGS ========= -->
     <section id="storefront" aria-labelledby="storefront-title">
-      <h2 id="storefront-title">Storefront</h2>
+      <h2 id="storefront-title" class="header">Storefront</h2>
       <p>Your public store link: <code>yourstore.ourdomain.com</code></p>
 
-      <form action="#" method="post">
+      <form id="storefrontForm" action="#" method="post">
         <fieldset>
           <legend>Branding</legend>
           <label for="s-name">Store Name</label><br />
@@ -238,8 +239,8 @@
 
     <!-- ========== PAYMENTS ========= -->
     <section id="payments" aria-labelledby="payments-title">
-      <h2 id="payments-title">Payments</h2>
-      <form action="#" method="post">
+      <h2 id="payments-title" class="header">Payments</h2>
+      <form id="paymentsForm" action="#" method="post">
         <fieldset>
           <legend>Mobile Money Settings</legend>
           <label for="mo-network">MoMo Network</label><br />
@@ -263,7 +264,7 @@
 
     <!-- ========== DELIVERY ========= -->
     <section id="delivery" aria-labelledby="delivery-title">
-      <h2 id="delivery-title">Delivery</h2>
+      <h2 id="delivery-title" class="header">Delivery</h2>
       <form action="#" method="post">
         <fieldset>
           <legend>Delivery Zones (Placeholder)</legend>
@@ -302,7 +303,7 @@
 
     <!-- ========== NOTIFICATIONS ========= -->
     <section id="notifications" aria-labelledby="notifications-title">
-      <h2 id="notifications-title">Notifications</h2>
+      <h2 id="notifications-title" class="header">Notifications</h2>
       <form action="#" method="post">
         <fieldset>
           <legend>Order Alerts</legend>
@@ -324,8 +325,8 @@
 
     <!-- ========== ACCOUNT ========= -->
     <section id="account" aria-labelledby="account-title">
-      <h2 id="account-title">Account</h2>
-      <form action="#" method="post">
+      <h2 id="account-title" class="header">Account</h2>
+      <form id="accountForm" action="#" method="post">
         <fieldset>
           <legend>Profile</legend>
           <label for="a-name">Full Name</label><br />
@@ -348,7 +349,7 @@
 
     <!-- ========== SUPPORT ========= -->
     <section id="support" aria-labelledby="support-title">
-      <h2 id="support-title">Support</h2>
+      <h2 id="support-title" class="header">Support</h2>
       <p>Need help? Contact support via email or WhatsApp.</p>
       <address>
         <p>Email: support@example.com</p>
@@ -364,7 +365,88 @@
 
   <!-- ========================= FOOTER ========================= -->
   <footer role="contentinfo">
-    <p>&copy; <span id="year">2025</span> Your Platform Name</p>
+    <p>&copy; <span id="year">2025</span> Cartlinked</p>
   </footer>
+
+  <script>
+    // Initialize forms when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize each form with auto-save functionality
+      initializeForm('productForm');
+      initializeForm('inventoryForm');
+      initializeForm('storefrontForm');
+      initializeForm('paymentsForm');
+      initializeForm('accountForm');
+      
+      // Show saved data summary in console
+      console.log('=== SAVED FORM DATA SUMMARY ===');
+      console.log('Product Form:', showSavedDataSummary('productForm'));
+      console.log('Inventory Form:', showSavedDataSummary('inventoryForm'));
+      console.log('Storefront Form:', showSavedDataSummary('storefrontForm'));
+      console.log('Payments Form:', showSavedDataSummary('paymentsForm'));
+      console.log('Account Form:', showSavedDataSummary('accountForm'));
+      
+      // Add some utility buttons for testing (you can remove these later)
+      addUtilityButtons();
+    });
+    
+    // Add utility buttons for testing form data management
+    function addUtilityButtons() {
+      const header = document.querySelector('header');
+      const utilityDiv = document.createElement('div');
+      utilityDiv.style.cssText = `
+        margin: 15px 0; 
+        padding: 15px; 
+        background: linear-gradient(100deg, #8ef5ec, white, #8ef5ec);
+        border-radius: 8px; 
+        border: 1px solid rgba(142, 245, 236, 0.3);
+        box-shadow: 0 2px 10px rgba(142, 245, 236, 0.2);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      `;
+      utilityDiv.innerHTML = `
+        <h4 style="margin: 0 0 10px 0; color: #333; font-size: 16px;">Form Data Utilities:</h4>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button onclick="console.log('All saved data:', getAllSavedData())" style="
+            background: rgba(255, 255, 255, 0.8); 
+            border: 1px solid #8ef5ec; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 12px;
+            transition: all 0.2s ease;
+          " onmouseover="this.style.background='rgba(142, 245, 236, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.8)'">View All Saved Data</button>
+          <button onclick="clearFormData('productForm')" style="
+            background: rgba(255, 255, 255, 0.8); 
+            border: 1px solid #8ef5ec; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 12px;
+            transition: all 0.2s ease;
+          " onmouseover="this.style.background='rgba(142, 245, 236, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.8)'">Clear Product Form</button>
+          <button onclick="exportFormData('productForm')" style="
+            background: rgba(255, 255, 255, 0.8); 
+            border: 1px solid #8ef5ec; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 12px;
+            transition: all 0.2s ease;
+          " onmouseover="this.style.background='rgba(142, 245, 236, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.8)'">Export Product Data</button>
+          <button onclick="loadFormData('productForm')" style="
+            background: rgba(255, 255, 255, 0.8); 
+            border: 1px solid #8ef5ec; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 12px;
+            transition: all 0.2s ease;
+          " onmouseover="this.style.background='rgba(142, 245, 236, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.8)'">Reload Product Form</button>
+        </div>
+      `;
+      header.appendChild(utilityDiv);
+    }
+  </script>
 </body>
+<script src="script.js"></script>
 </html>
