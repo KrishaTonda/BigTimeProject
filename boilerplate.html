@@ -48,7 +48,7 @@
       <h2 id="products-title" class="header">Product Management</h2>
 
       <!-- Create / Edit Product Form -->
-      <form id="productForm" action="#" method="post" aria-labelledby="product-form-title">
+      <form id="productForm" action="#" method="post" aria-labelledby="product-form-title" onsubmit="handleProductFormSubmit(event)">
         <h3 id="product-form-title">Add / Edit Product</h3>
 
         <fieldset>
@@ -72,7 +72,8 @@
           <input id="p-category" name="category" type="text" placeholder="e.g., Fashion, Food" /><br /><br />
 
           <label for="p-images">Product Images</label><br />
-          <input id="p-images" name="images" type="file" accept="image/*" multiple /><br /><br />
+          <input id="p-images" name="images" type="file" accept="image/*" onchange="handleImagePreview(event)" /><br />
+          <div id="imagePreview"></div><br />
 
           <button type="submit">Save Product</button>
           <button type="reset">Reset</button>
@@ -81,31 +82,20 @@
 
       <!-- Product List Table -->
       <h3>Products List</h3>
-      <p><!-- TODO: Replace with searchable + sortable table. --></p>
-      <table border="1" aria-label="Products table">
+      <p>Your products will appear here as you add them.</p>
+      <table border="1" aria-label="Products table" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
         <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price (GHS)</th>
-            <th>Stock</th>
-            <th>Status</th>
-            <th>Actions</th>
+          <tr style="background: linear-gradient(100deg, #8ef5ec, white, #8ef5ec);">
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Image</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Name</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Price (GHS)</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Stock</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Status</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>(img)</td>
-            <td>Sample Product</td>
-            <td>0.00</td>
-            <td>0</td>
-            <td>Draft</td>
-            <td>
-              <button type="button">Edit</button>
-              <button type="button">Delete</button>
-              <button type="button">Publish</button>
-            </td>
-          </tr>
+          <!-- Products will be dynamically added here -->
         </tbody>
       </table>
       <hr />
@@ -377,6 +367,9 @@
       initializeForm('storefrontForm');
       initializeForm('paymentsForm');
       initializeForm('accountForm');
+      
+      // Initialize product table
+      updateProductTable();
       
       // Show saved data summary in console
       console.log('=== SAVED FORM DATA SUMMARY ===');
